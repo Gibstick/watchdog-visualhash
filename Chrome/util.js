@@ -37,12 +37,12 @@ function passwordStrength(password) {
 
 function gradientStringForHash(passwordHash) {
     var gradientString = "-moz-linear-gradient(left";
-    
+
     for (var hashBandX = 0; hashBandX < passwordHash.length/6-1; hashBandX++)
         gradientString += ", #" + passwordHash.substr(hashBandX*6,6).toUpperCase();
-    
+
     gradientString += ')';
-    
+
     return gradientString;
 }
 
@@ -61,20 +61,20 @@ function randomizeHash(passwordHash) {
 function getDataURLForHash(passwordHash,inputWidth,inputHeight) {
     var win = window;
     try {
-        win = unsafeWindow;   
+        win = unsafeWindow;
     }
     catch(e) {}
     var canvas = win.document.createElement('canvas');
     canvas.height = inputHeight;
     canvas.width = inputWidth;
     var context = canvas.getContext('2d');
-    
+
     passwordHash = randomizeHash(passwordHash);
 
     for (var hashBandX = 0; hashBandX < 4; hashBandX++) {
         context.fillStyle='#' + passwordHash.substr(hashBandX*6,6);
         context.fillRect(hashBandX/4*inputWidth,0,inputWidth/4,inputHeight);
-        
+
         context.fillStyle='#000000';
         context.fillRect(((hashBandX+1)/4*inputWidth)-1,0,2,inputHeight);
     }
@@ -89,7 +89,7 @@ function getDataURLForHash(passwordHash,inputWidth,inputHeight) {
 *
 *  Secure Hash Algorithm (SHA1)
 *  http://www.webtoolkit.info/
-* 
+*
 * minified, obviously.
 *
 **/
